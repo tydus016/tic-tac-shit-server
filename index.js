@@ -43,7 +43,7 @@ server.listen(PORT, () => {
   console.log(`listening on http://localhost:${PORT}`);
 });
 
-const base_url = "http://localhost/salon_queuing_system_ci/";
+const base_url = "https://eomegajr.tech/demo/salon_queing_system/";
 
 const update_queues = (io, id) => {
   const data = new FormData();
