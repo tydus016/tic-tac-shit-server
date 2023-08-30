@@ -27,6 +27,10 @@ app.get("/", (req, resp) => {
   resp.send("test hala");
 });
 
+app.get("/arduino", (req, resp) => {
+  resp.send({name: "test hala"});
+});
+
 io.on("connection", (socket) => {
   console.log("user connected!");
 
