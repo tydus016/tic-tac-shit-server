@@ -27,10 +27,6 @@ app.get("/", (req, resp) => {
   resp.send("test hala");
 });
 
-app.get("/arduino", (req, resp) => {
-  resp.send({name: "test hala"});
-});
-
 io.on("connection", (socket) => {
   console.log("user connected!");
 
@@ -40,24 +36,29 @@ io.on("connection", (socket) => {
     console.log(post);
     update_queues(io, post);
   });
-
 });
 
 server.listen(PORT, () => {
   console.log(`listening on http://localhost:${PORT}`);
 });
 
-const base_url = "https://eomegajr.tech/demo/salon_queing_system/";
+const base_url = "http://localhost:8082/";
 
 const update_queues = (io, id) => {
   // const data = new FormData();
   // data.append("employee_id", id);
-  const data = {employee_id: id}
+  const data = { employee_id: id };
   send_axios({ url: "queue/update_queue", params: data })
     .then((res) => {
-      console.log('res', res.data);
+      console.log("res", res.data);
       if (res) {
-        io.emit("update queue", res.data.queues);
+        if (!res.data.status) {
+          console.log("null");
+          io.emit("update queue", res.data);
+        } else {
+          console.log("dili null");
+          io.emit("update queue", res.data.queues);
+        }
       }
     })
     .catch((err) => {
@@ -74,7 +75,7 @@ const get_queues = async (socket) => {
 
 const send_axios = async (data) => {
   const headers = {
-    'Content-Type': 'application/json', // Adjust content type if needed
+    "Content-Type": "application/json", // Adjust content type if needed
   };
   return axios
     .post(base_url + data.url, data.params, headers)
