@@ -40,7 +40,6 @@ io.on("connection", (socket) => {
     console.log(post);
     update_queues(io, post);
   });
-
 });
 
 server.listen(PORT, () => {
@@ -55,9 +54,15 @@ const update_queues = (io, id) => {
   const data = {employee_id: id}
   send_axios({ url: "queue/update_queue", params: data })
     .then((res) => {
-      console.log('res', res.data);
+      console.log("res", res.data);
       if (res) {
-        io.emit("update queue", res.data.queues);
+        if (!res.data.status) {
+          console.log("null");
+          io.emit("update queue", res.data);
+        } else {
+          console.log("dili null");
+          io.emit("update queue", res.data.queues);
+        }
       }
     })
     .catch((err) => {
