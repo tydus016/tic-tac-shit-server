@@ -44,10 +44,14 @@ server.listen(PORT, () => {
 
 const base_url = "http://localhost:8082/";
 
-const update_queues = (io, id) => {
+const update_queues = (io, post) => {
   // const data = new FormData();
   // data.append("employee_id", id);
-  const data = { employee_id: id };
+  const data = { 
+    employee_id: post.employee_id,
+    queue_position: post.queue_position
+   };
+   console.log("post data", data);
   send_axios({ url: "queue/update_queue", params: data })
     .then((res) => {
       console.log("res", res.data);
