@@ -42,7 +42,7 @@ server.listen(PORT, () => {
   console.log(`listening on http://localhost:${PORT}`);
 });
 
-const base_url = "http://localhost:8082/";
+const base_url = "https://salon-live-server.onrender.com";
 
 const update_queues = (io, post) => {
   // const data = new FormData();
