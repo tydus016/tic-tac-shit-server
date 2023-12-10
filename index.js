@@ -27,10 +27,6 @@ app.get("/", (req, resp) => {
   resp.send("test hala");
 });
 
-app.get("/arduino", (req, resp) => {
-  resp.send({name: "test hala"});
-});
-
 io.on("connection", (socket) => {
   console.log("user connected!");
 
@@ -46,7 +42,7 @@ server.listen(PORT, () => {
   console.log(`listening on http://localhost:${PORT}`);
 });
 
-const base_url = "https://eomegajr.tech/demo/salon_queing_system/";
+const base_url = "http://localhost:8082/";
 
 const update_queues = (io, post) => {
   // const data = new FormData();
@@ -84,7 +80,7 @@ const get_queues = async (socket) => {
 
 const send_axios = async (data) => {
   const headers = {
-    'Content-Type': 'application/json', // Adjust content type if needed
+    "Content-Type": "application/json", // Adjust content type if needed
   };
   return axios
     .post(base_url + data.url, data.params, headers)
