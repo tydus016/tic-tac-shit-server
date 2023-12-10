@@ -49,7 +49,8 @@ const update_queues = (io, post) => {
   // data.append("employee_id", id);
   const data = { 
     employee_id: post.employee_id,
-    queue_position: post.queue_position
+    queue_position: post.queue_position,
+    service_type: post.service_type,
    };
    console.log("post data", data);
   send_axios({ url: "queue/update_queue", params: data })
