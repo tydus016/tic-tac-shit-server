@@ -45,23 +45,21 @@ server.listen(PORT, () => {
 const base_url = "https://eomegajr.tech/demo/salon_queing_system/";
 
 const update_queues = (io, post) => {
-  // const data = new FormData();
-  // data.append("employee_id", id);
   const data = { 
     employee_id: post.employee_id,
     queue_position: post.queue_position,
     service_type: post.service_type,
    };
+   base_url = post.base_url_referrer
+
    console.log("post data", data);
   send_axios({ url: "queue/update_queue", params: data })
     .then((res) => {
       console.log("res", res.data);
       if (res) {
         if (!res.data.status) {
-          console.log("null");
           io.emit("update queue", res.data);
         } else {
-          console.log("dili null");
           io.emit("update queue", res.data.queues);
         }
       }
