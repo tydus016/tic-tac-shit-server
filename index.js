@@ -1,12 +1,18 @@
 import express from "express";
 import { Server } from "socket.io";
 import cors from "cors";
-import http from "http";
+import http from "https";
 import axios from "axios";
 
 const app = express();
 const PORT = 8000;
-const server = http.createServer(app);
+
+const serverOptions = {
+  key: fs.readFileSync('C:/Certbot/live/api-eomegajr.site/privkey.pem'),
+  cert: fs.readFileSync('C:/Certbot/live/api-eomegajr.site/fullchain.pem')
+};
+
+const server = http.createServer(serverOptions, app);
 
 const io = new Server(server, {
   cors: {
