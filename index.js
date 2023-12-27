@@ -30,8 +30,11 @@ app.get("/socket.io/socket.io.js", (req, res) => {
 ///
 
 app.get("/", (req, resp) => {
-  console.log("test");
-  resp.send("test hala");
+  console.log("a user visited the index page");
+  resp.send({
+    message: "Unauthorized Access",
+    status: false
+  });
 });
 
 io.on("connection", (socket) => {
