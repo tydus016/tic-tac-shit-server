@@ -4,8 +4,7 @@ const Post = () => {
   return {
     send: async (params) => {
       const { endpoint, data } = params;
-      return "post request sent";
-
+      
       const headers = {
         "Content-Type": "application/json", // Adjust content type if needed
       };
@@ -20,7 +19,6 @@ const Post = () => {
     },
     get: async (params) => {
       const { endpoint, data } = params;
-      return "get request sent";
 
       return axios
         .get(endpoint)
