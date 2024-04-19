@@ -40,6 +40,8 @@ io.on("connection", (socket) => {
   const message = `---SOCKET CONNECTION--- [ID] : ${id} [IP ADDRESS] : ${ip_address}`;
   Logger(message, "access");
 
+  io.emit("success_connection", { user_id: id });
+
   Socket(socket, io);
 });
 
